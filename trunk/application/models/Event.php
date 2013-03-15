@@ -24,7 +24,7 @@ class Event
 	private $name;
 	
 	/**
-	 * @Column /type="date"
+	 * @Column(type="date")
 	 * 
 	 * @var DateTime
 	 */
