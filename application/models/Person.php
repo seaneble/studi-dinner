@@ -99,16 +99,5 @@ class Person
 	 * @var string
 	 */
 	private $e_mail;
-	
-	/**
-	 * Persönliche Annotationen
-	 * 
-	 * type ->text<- stellt eine laengere Zeichenkette zur Verfuegung als 1Byte!
-	 * 
-	 * @Column(type="text")
-	 *
-	 * @var string
-	 */
-	private $comment;
 }
 ?>
