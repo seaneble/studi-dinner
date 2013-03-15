@@ -1,32 +1,33 @@
 <?php
 
 /**
- * Team-Datensatz
+ * Gang-Datensatz
  * 
- * Eine lange Beschreibung
+ * Eine Veranstaltung besteht aus mehreren Gängen oder Gerichten, die
+ * wechselseitig zubereitet werden.
  * 
  * @Entity
  * @Table(name="course")
  * 
  * @copyright 2013 DHBW StuV Stuttgart
  * @author    Benjamin Mannal <benjamin.mannal@gmail.com>
- * @version   $Event$
-*/
+ * @version   $Id$
+ */
 class Course
 {
 	/**
-	 * Eindeutige laufende Nummer der Gänge
+	 * Eindeutige laufende Nummer des Gangs
 	 * 
 	 * @Id @Column(type="integer")
 	 * @GeneratedValue(strategy="IDENTITY")
-	 *
+	 * 
 	 * @var int
 	 */
 	private $id;
 	
 	/**
 	 * @Column(type="string", length=255)
-	 *
+	 * 
 	 * @var string
 	 */
 	private $name;

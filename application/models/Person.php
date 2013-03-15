@@ -5,7 +5,9 @@ namespace application\models;
 /**
  * Personen-Datensatz
  *
- * Diese Datei enthaelt die ....
+ * Eine Person ist ein Teilnehmer einer Veranstaltung. Es werden sowohl die
+ * Login-Daten als auch persönliche Informationen zum Ort der Küche und Essens-
+ * Vorlieben gespeichert.
  *
  * @Entity
  * @Table(name="person")
@@ -14,11 +16,10 @@ namespace application\models;
  * @author    Matthias Holetzko <mholetzko@gmx.net>
  * @version   $Id$
  */
-
 class Person
 {
 	/**
-	 * Eindeutige laufende Nummer des Teams
+	 * Eindeutige laufende Nummer der Person
 	 *
 	 * @Id @Column(type="integer")
 	 * @GeneratedValue(strategy="IDENTITY")
@@ -46,14 +47,7 @@ class Person
 	 *
 	 * @var string
 	 */
-	private $city;
-	
-	/**
-	 * @Column(type="string", length=255)
-	 *
-	 * @var string
-	 */
-	private $street;
+	private $address_street;
 	
 	/**
      * Hausnummer
@@ -65,14 +59,34 @@ class Person
      * 
      * @var string
      */
-	private $street_nr;
+	private $address_number;
 	
 	/**
+     * Postleitzahl
+     * 
+     * @Column(type="integer")
+     * 
+     * @var int
+     */
+	private $address_zip;
+	
+	/**
+	 * @Column(type="string", length=255)
+	 *
+	 * @var string
+	 */
+	private $address_city;
+	
+	/**
+	 * Angaben zur Adresse
+	 * 
+	 * Denkbar sind Angaben wie „Durch den Hinterhof“, „blaues Klingelschild“, etc.
+	 * 
 	 * @Column(type="text")
 	 *
 	 * @var string
 	 */
-	private $address_specifications;
+	private $address_details;
 	
 	/**
 	 * @Column(type="string", length=255)
@@ -85,19 +99,18 @@ class Person
      * Telefonnummer
      * 
      * String aufgrund eventuell wechselnder Zusammensetzung von Telefonnummern 
-     * und Zusaetzen in Form von Sonderzeichen
+     * und Zusätzen in Form von Sonderzeichen
      * 
      * @Column(type="string", length=30)
      * 
      * @var string
      */
-	private $phone_number;
+	private $phone;
 	
 	/**
 	 * @Column(type="string", length=255)
 	 *
 	 * @var string
 	 */
-	private $e_mail;
+	private $email;
 }
-?>

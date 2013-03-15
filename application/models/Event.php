@@ -1,9 +1,13 @@
 <?php
 
+namespace application\models;
+
 /**
- * Team-Datensatz
+ * Event-Datensatz
  * 
- * Eine lange Beschreibung
+ * Jede Kombination aus Teams wird einer Veranstaltung zugeordnet. Im Rahmen
+ * verschieder Veranstaltungen können Personen in unterschiedlichen Teams
+ * zusammenkommen.
  * 
  * @Entity
  * @Table(name="event")
@@ -25,13 +29,17 @@ class Event
 	private $id;
 	
 	/**
-	 * @Column(type="string", length=255)
+	 * Name der Veranstaltung für interne Referenz-Zwecke
+	 * 
+	 * @Column(type="string", length=255, unique=true)
 	 *
 	 * @var string
 	 */
 	private $name;
 	
 	/**
+	 * Datum der Veranstaltung für interne Referenz-Zwecke
+	 * 
 	 * @Column(type="date")
 	 * 
 	 * @var DateTime

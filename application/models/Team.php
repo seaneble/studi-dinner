@@ -5,7 +5,9 @@ namespace application\models;
 /**
  * Team-Datensatz
  * 
- * Eine lange Beschreibung
+ * Ein Team besteht aus zwei Personen. Im Rahmen einer Veranstaltung ist es
+ * dafür zuständig, einen Gang zuzubereiten, zu dem zwei weitere Teams
+ * eingeladen sind.
  * 
  * @Entity
  * @Table(name="team")
@@ -25,4 +27,43 @@ class Team
      * @var int
      */
     private $id;
+	
+	/**
+	 * Team-Name zur Identifizierung
+	 * 
+	 * Der Name muss eindeutig sein, damit bei einer Veranstaltung planlos anrufende
+	 * Menschen sich eindeutig identifizieren können.
+	 * 
+	 * @Column(type="string", length=255)
+	 *
+	 * @var string
+	 */
+	private $name;
+	
+	/**
+     * Menü-Gang, den das Team zubereiten soll
+     * 
+     * HIER FEHLT DIE DOCTRINE-LOGIK ZUR REFERENZIERUNG DER TABELLE course
+     * 
+     * @var Course|int
+     */
+    private $course;
+    
+    /**
+     * Gast-Team #1
+     * 
+     * HIER FEHLT DIE DOCTRINE-LOGIK ZUR REFERENZIERUNG DER TABELLE team
+     * 
+     * @var Team|int
+     */
+    private $guest1;
+    
+    /**
+     * Gast-Team #2
+     * 
+     * HIER FEHLT DIE DOCTRINE-LOGIK ZUR REFERENZIERUNG DER TABELLE team
+     * 
+     * @var Team|int
+     */
+    private $guest2;
 }
