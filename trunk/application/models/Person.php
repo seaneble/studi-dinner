@@ -1,5 +1,20 @@
 <?php 
 
+namespace application\models;
+
+/**
+ * Personen-Datensatz
+ *
+ * Diese Datei enthaelt die ....
+ *
+ * @Entity
+ * @Table(name="person")
+ *
+ * @copyright 2013 DHBW StuV Stuttgart
+ * @author    Matthias Holetzko <mholetzko@gmx.net>
+ * @version   $Id$
+ */
+
 class Person
 {
 	/**
