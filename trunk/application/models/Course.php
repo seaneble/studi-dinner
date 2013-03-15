@@ -1,8 +1,16 @@
 <?php
 
 /**
-* @Entity
-* @Table(name="course")
+ * Team-Datensatz
+ * 
+ * Eine lange Beschreibung
+ * 
+ * @Entity
+ * @Table(name="course")
+ * 
+ * @copyright 2013 DHBW StuV Stuttgart
+ * @author    Benjamin Mannal <benjamin.mannal@gmail.com>
+ * @version   $Event$
 */
 class Course
 {
