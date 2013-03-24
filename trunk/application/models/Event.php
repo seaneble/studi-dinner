@@ -41,7 +41,7 @@ class Event
 	/**
 	 * Teams, die einem Event zugeordnet sind
 	 * 
-	 * @OneToMany(targetEntity="Team", mappedby="event")
+	 * @OneToMany(targetEntity="Team", mappedBy="event")
 	 * 
 	 * @var Team[]
 	 */
