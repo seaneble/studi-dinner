@@ -88,13 +88,6 @@ class Person {
 	private $address_details;
 
 	/**
-	 * @Column(type="string", length=255)
-	 *
-	 * @var string
-	 */
-	private $password;
-
-	/**
 	 * Telefonnummer
 	 * 
 	 * String aufgrund eventuell wechselnder Zusammensetzung von Telefonnummern 
@@ -120,8 +113,16 @@ class Person {
 	 *
 	 * @var Team[]
 	 */
+	
 	private $teams_host;
 
+	/**
+	 * @Column(type="string", length=255)
+	 *
+	 * @var string
+	 */
+	private $password;
+	
 	/**
 	 * Teams, in denen diese Person als Partner Mitglied ist
 	 *
