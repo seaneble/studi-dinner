@@ -6,7 +6,7 @@ namespace application\models;
  * Personen-Datensatz
  *
  * Eine Person ist ein Teilnehmer einer Veranstaltung. Es werden sowohl die
- * Login-Daten als auch persönliche Informationen zum Ort der Küche und Essens-
+ * Login-Daten als auch persï¿½nliche Informationen zum Ort der Kï¿½che und Essens-
  * Vorlieben gespeichert.
  *
  * @Entity
@@ -53,7 +53,7 @@ class Person
      * Hausnummer
      * 
      * String aufgrund eventuell wechselnder Zusammensetzung von Hausnummern 
-     * und Adresszusätzen in Form von Buchstaben/Text
+     * und Adresszusï¿½tzen in Form von Buchstaben/Text
      * 
      * @Column(type="string", length=10)
      * 
@@ -80,7 +80,7 @@ class Person
 	/**
 	 * Angaben zur Adresse
 	 * 
-	 * Denkbar sind Angaben wie „Durch den Hinterhof“, „blaues Klingelschild“, etc.
+	 * Denkbar sind Angaben wie ï¿½Durch den Hinterhofï¿½, ï¿½blaues Klingelschildï¿½, etc.
 	 * 
 	 * @Column(type="text")
 	 *
@@ -99,7 +99,7 @@ class Person
      * Telefonnummer
      * 
      * String aufgrund eventuell wechselnder Zusammensetzung von Telefonnummern 
-     * und Zusätzen in Form von Sonderzeichen
+     * und Zusï¿½tzen in Form von Sonderzeichen
      * 
      * @Column(type="string", length=30)
      * 
@@ -113,4 +113,22 @@ class Person
 	 * @var string
 	 */
 	private $email;
+
+	/**
+	 * Teams, in denen diese Person als Gastgeber Mitglied ist
+	 *
+	 * @OneToMany(targetEntity="Team", mappedBy="host_person")
+	 *
+	 * @var Team[]
+	 */
+	private $teams_host;
+
+	/**
+	 * Teams, in denen diese Person als Partner Mitglied ist
+	 *
+	 * @OneToMany(targetEntity="Team", mappedBy="partner_person")
+	 *
+	 * @var Team[]
+	 */
+	private $teams_partner;
 }

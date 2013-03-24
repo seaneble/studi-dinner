@@ -40,4 +40,13 @@ class Course
 	 * @var int
 	 */
 	private $sequence;
+
+	/**
+	 * Teams, die einem Gang zugeordnet sind
+	 *
+	 * @OneToMany(targetEntity="Team", mappedBy="course")
+	 *
+	 * @var Team[]
+	 */
+	private $teams;
 }
