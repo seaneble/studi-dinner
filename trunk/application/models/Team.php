@@ -43,8 +43,8 @@ class Team
 	/**
      * Menü-Gang, den das Team zubereiten soll
      * 
-     * HIER FEHLT DIE DOCTRINE-LOGIK ZUR REFERENZIERUNG DER TABELLE course
-     * @Column(type="integer")
+     * @ManyToOne(targetEntity="Course", inversedBy="teams")
+     * @JoinColumn(name="course", referencedColumnName="id", onDelete="RESTRICT")
      * 
      * @var Course|int
      */
@@ -73,22 +73,22 @@ class Team
     /**
      * Gastgeber
      * 
-     * HIER FEHLT DIE DOCTRINE-LOGIK ZUR REFERENZIERUNG DER TABELLE team
-     * @Column(type="integer")
+     * @ManyToOne(targetEntity="Person", inversedBy="teams_host")
+     * @JoinColumn(name="host_person", referencedColumnName="id", nullable=false, onDelete="RESTRICT")
      *
      * @var Person|int
      */
-    private $host;
+    private $host_person;
     
     /**
      * Partner
      *
-     * HIER FEHLT DIE DOCTRINE-LOGIK ZUR REFERENZIERUNG DER TABELLE team
-     * @Column(type="integer")
+     * @ManyToOne(targetEntity="Person", inversedBy="teams_partner")
+     * @JoinColumn(name="partner_person", referencedColumnName="id", nullable=false, onDelete="RESTRICT")
      *
      * @var Person|int
      */
-    private $partner;
+    private $partner_person;
     
     /**
      * Veranstaltung
