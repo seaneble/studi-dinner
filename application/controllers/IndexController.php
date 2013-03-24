@@ -17,10 +17,23 @@ class IndexController extends Zend_Controller_Action
 		
 		$form = new \application\forms\Register;
 		
-		if($request->isPost() && $form->isValid($request->getPost()))
+		if($request->isPost() && $form->isValid($data = $request->getPost()))
 		{
-			$person = new \application\model\Person($form->getValues());
+			$person = new \application\models\Person();
+			$person->setFirstName($data['firstname'])
+			       ->setLastName($data['lastname'])
+			       ->setAddressStreet($data['address_street'])
+			       ->setAddressNumber($data['address_number'])
+			       ->setAddressZip($data['address_zip'])
+			       ->setAddressCity($data['address_city'])
+			       ->setAddressDetails($data['address_details'])
+			       ->setPhone($data['phone'])
+			       ->setEmail($data['email'])
+			       ->setPassword($data['password']);
+//			       ->set($data[''])
+			
 			$this->em->persist($person);
+			$this->em->flush();
 		}
 		
 		$this->view->form = $form;
