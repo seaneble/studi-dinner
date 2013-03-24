@@ -148,6 +148,13 @@ class Person {
 	 * @var Ingredient[]|int
 	 */
 	private $ingredients;
+	
+	public function __construct()
+	{
+		$this->ingredients   = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->teams_partner = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->teams_partner = new \Doctrine\Common\Collections\ArrayCollection();
+	}
 
 	/**
 	 * @return the int

@@ -47,6 +47,11 @@ class Event {
 	 * @var Team[]
 	 */
 	private $teams;
+	
+	public function __construct()
+	{
+		$this->teams = new \Doctrine\Common\Collections\ArrayCollection();
+	}
 
 	/**
 	 * @return the int
