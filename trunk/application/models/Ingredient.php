@@ -9,7 +9,10 @@ namespace application\models;
  * oder die sie aus ethischen bzw. religösen Gründen nicht verzehren darf und will.
  * 
  * @Entity
- * @Table(name="ingredient")
+ * @Table(
+ * 	   name="ingredient",
+ *     uniqueConstraints={@UniqueConstraint(name="ingredient_name_unique", columns={"name"})}
+ * )
  * 
  * @copyright 2013 DHBW StuV Stuttgart
  * @author    Benjamin Mannal <benjamin.mannal@gmail.com>
@@ -33,4 +36,6 @@ class Ingredient
 	 * @var string
 	 */
 	private $name;
+	
+	
 }
