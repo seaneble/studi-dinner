@@ -6,7 +6,7 @@ namespace application\models;
  * Personen-Datensatz
  *
  * Eine Person ist ein Teilnehmer einer Veranstaltung. Es werden sowohl die
- * Login-Daten als auch pers�nliche Informationen zum Ort der K�che und Essens-
+ * Login-Daten als auch persönliche Informationen zum Ort der Küche und Essens-
  * Vorlieben gespeichert.
  *
  * @Entity
@@ -53,7 +53,7 @@ class Person
      * Hausnummer
      * 
      * String aufgrund eventuell wechselnder Zusammensetzung von Hausnummern 
-     * und Adresszus�tzen in Form von Buchstaben/Text
+     * und Adresszusätzen in Form von Buchstaben/Text
      * 
      * @Column(type="string", length=10)
      * 
@@ -80,7 +80,7 @@ class Person
 	/**
 	 * Angaben zur Adresse
 	 * 
-	 * Denkbar sind Angaben wie �Durch den Hinterhof�, �blaues Klingelschild�, etc.
+	 * Denkbar sind Angaben wie „Durch den Hinterhof“, „blaues Klingelschild“, etc.
 	 * 
 	 * @Column(type="text")
 	 *
@@ -99,7 +99,7 @@ class Person
      * Telefonnummer
      * 
      * String aufgrund eventuell wechselnder Zusammensetzung von Telefonnummern 
-     * und Zus�tzen in Form von Sonderzeichen
+     * und Zusätzen in Form von Sonderzeichen
      * 
      * @Column(type="string", length=30)
      * 
@@ -131,4 +131,20 @@ class Person
 	 * @var Team[]
 	 */
 	private $teams_partner;
+	
+	/**
+	 * Zutaten und Abneigungen
+	 * 
+	 * @ManyToMany(targetEntity="Ingredient")
+     * @JoinTable(
+     *     name="person_dislikes",
+     *     joinColumns={
+     *         @JoinColumn(name="person_id", referencedColumnName="id")
+     *     },
+     *     inverseJoinColumns={
+     *         @JoinColumn(name="ingredient_id", referencedColumnName="id")
+     *     }
+     * )
+     * 
+     * @var Ingredient|int
 }
