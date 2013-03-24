@@ -38,4 +38,15 @@ class Event
 	 */
 	private $date;
 	
+	/**
+	 * Teams, die einem Event zugeordnet sind
+	 * 
+	 * @OneToMany(targetEntity="Team", mappedby="event")
+	 * 
+	 * @var Team[]
+	 */
+	private $teams;
+	
+	
+	
 }
