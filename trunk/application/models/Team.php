@@ -89,4 +89,14 @@ class Team
      * @var Person|int
      */
     private $partner;
+    
+    /**
+     * Veranstaltung
+     * 
+     * @ManyToOne(targetEntity="Event", inversedBy="teams")
+     * @JoinColumn(name="event", referencedColumnName="id")
+     *
+     * @var Event|int
+     */
+    private $event;
 }
