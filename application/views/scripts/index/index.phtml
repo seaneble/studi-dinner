@@ -1,7 +1,15 @@
 <h1>Studi-Dinner-Anmeldeseite</h1>
 
+<h2>Kommende Veranstaltungen:</h2>
 
+<?php if(count($this->events)): ?>
+<ul>
+<?php foreach ($this->events as $event): ?>
+<li><strong><?php echo (date_format($event->getDate(), 'd.m.Y')); ?></strong>: <?php echo $event->getName(); ?></li>
+<?php endforeach; ?>
+</ul>
+<?php else: ?>
+<p><strong>Momentan sind keine Veranstaltungen geplant.</strong></p>
+<?php endif; ?>
 
-<?php
-
-echo $this->date;
+<?php echo $this->form; ?>
