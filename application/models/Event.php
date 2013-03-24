@@ -1,5 +1,7 @@
 <?php
 
+namespace application\models;
+
 /**
  * Team-Datensatz
  * 
