@@ -94,7 +94,7 @@ class Team
      * Veranstaltung
      * 
      * @ManyToOne(targetEntity="Event", inversedBy="teams")
-     * @JoinColumn(name="event", referencedColumnName="id", nullable=false, onDelete=restrict)
+     * @JoinColumn(name="event", referencedColumnName="id", nullable=false, onDelete="RESTRICT")
      *
      * @var Event|int
      */
