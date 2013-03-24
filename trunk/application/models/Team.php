@@ -44,6 +44,7 @@ class Team
      * Menü-Gang, den das Team zubereiten soll
      * 
      * HIER FEHLT DIE DOCTRINE-LOGIK ZUR REFERENZIERUNG DER TABELLE course
+     * @Column(type="integer")
      * 
      * @var Course|int
      */
@@ -53,6 +54,7 @@ class Team
      * Gast-Team #1
      * 
      * HIER FEHLT DIE DOCTRINE-LOGIK ZUR REFERENZIERUNG DER TABELLE team
+     * @Column(type="integer")
      * 
      * @var Team|int
      */
@@ -62,6 +64,7 @@ class Team
      * Gast-Team #2
      * 
      * HIER FEHLT DIE DOCTRINE-LOGIK ZUR REFERENZIERUNG DER TABELLE team
+     * @Column(type="integer")
      * 
      * @var Team|int
      */
@@ -71,6 +74,7 @@ class Team
      * Gastgeber
      * 
      * HIER FEHLT DIE DOCTRINE-LOGIK ZUR REFERENZIERUNG DER TABELLE team
+     * @Column(type="integer")
      *
      * @var Person|int
      */
@@ -80,6 +84,7 @@ class Team
      * Partner
      *
      * HIER FEHLT DIE DOCTRINE-LOGIK ZUR REFERENZIERUNG DER TABELLE team
+     * @Column(type="integer")
      *
      * @var Person|int
      */
