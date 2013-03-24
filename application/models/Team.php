@@ -51,24 +51,31 @@ class Team
     private $course;
     
     /**
-     * Gast-Team #1
+     * Gast-Teams
      * 
-     * HIER FEHLT DIE DOCTRINE-LOGIK ZUR REFERENZIERUNG DER TABELLE team
-     * @Column(type="integer")
+     * @ManyToMany(targetEntity="Team", inversedBy="hosts")
+     * @JoinTable(
+     *     name="guests",
+     *     joinColumns={
+     *         @JoinColumn(name="host_id", referencedColumnName="id")
+     *     },
+     *     inverseJoinColumns={
+     *         @JoinColumn(name="guest_id", referencedColumnName="id")
+     *     }
+     * )
      * 
      * @var Team|int
      */
-    private $guest1;
+    private $guests;
     
     /**
-     * Gast-Team #2
+     * Gastgeber-Teams
      * 
-     * HIER FEHLT DIE DOCTRINE-LOGIK ZUR REFERENZIERUNG DER TABELLE team
-     * @Column(type="integer")
+     * @ManyToMany(targetEntity="Team", mappedBy="guests")
      * 
      * @var Team|int
      */
-    private $guest2;
+    private $hosts;
 
     /**
      * Gastgeber
