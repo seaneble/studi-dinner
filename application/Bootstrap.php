@@ -2,6 +2,39 @@
 
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
+    /**
+     * Autoloader registrieren
+     * 
+     * Der Doctrine-Classloader ersetzt den Zend-Autoloader.
+     */
+    protected function _initAutoload()
+    {
+        require_once 'Doctrine/Common/ClassLoader.php';
+
+        // disable Zend Autoloader
+        spl_autoload_unregister(array('Zend_Loader_Autoloader', 'autoload'));
+
+        // ZendFramework laden
+        $autoloader = new \Doctrine\Common\ClassLoader('Zend');
+        $autoloader->setNamespaceSeparator('_');
+        $autoloader->register();
+
+        // Doctrine laden
+        $autoloader = new \Doctrine\Common\ClassLoader('Doctrine');
+        $autoloader->register();
+
+        // ETES-Library laden
+//        $autoloader = new \Doctrine\Common\ClassLoader('ETES');
+//        $autoloader->register();
+
+        // Models laden
+        $autoloader = new \Doctrine\Common\ClassLoader(
+            'application',
+            realpath(APPLICATION_PATH . '/..')
+        );
+        $autoloader->register();
+    }
+
     protected function _initDoctrine()
     {
         $config = new \Doctrine\ORM\Configuration();
