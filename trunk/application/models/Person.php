@@ -146,5 +146,7 @@ class Person
      *     }
      * )
      * 
-     * @var Ingredient|int
+     * @var Ingredient[]|int
+     */
+    private $ingredients;
 }
