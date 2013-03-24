@@ -33,3 +33,4 @@ class Ingredients
 	 * @var string
 	 */
 	private $name;
+}
