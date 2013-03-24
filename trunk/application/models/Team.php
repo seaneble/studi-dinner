@@ -66,4 +66,22 @@ class Team
      * @var Team|int
      */
     private $guest2;
+
+    /**
+     * Gastgeber
+     * 
+     * HIER FEHLT DIE DOCTRINE-LOGIK ZUR REFERENZIERUNG DER TABELLE team
+     *
+     * @var Person|int
+     */
+    private $host;
+    
+    /**
+     * Partner
+     *
+     * HIER FEHLT DIE DOCTRINE-LOGIK ZUR REFERENZIERUNG DER TABELLE team
+     *
+     * @var Person|int
+     */
+    private $partner;
 }
