@@ -105,6 +105,12 @@ class Team {
 	 */
 	private $event;
 
+	public function __construct() 
+	{
+		$this->guests = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->hosts  = new \Doctrine\Common\Collections\ArrayCollection();
+	}
+	
 	/**
 	 * @return the int
 	 */

@@ -48,6 +48,11 @@ class Course {
 	 * @var Team[]
 	 */
 	private $teams;
+	
+	public function _construct()
+	{
+		$this->teams = new \Doctrine\Common\Collections\ArrayCollection();
+	}
 
 	/**
 	 * @return the int
