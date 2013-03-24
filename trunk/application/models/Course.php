@@ -1,9 +1,11 @@
 <?php
 
+namespace application\models;
+
 /**
  * Gang-Datensatz
  * 
- * Eine Veranstaltung besteht aus mehreren Gängen oder Gerichten, die
+ * Eine Veranstaltung besteht aus mehreren Gï¿½ngen oder Gerichten, die
  * wechselseitig zubereitet werden.
  * 
  * @Entity
