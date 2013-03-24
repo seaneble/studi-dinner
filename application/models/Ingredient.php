@@ -18,6 +18,7 @@ namespace application\models;
  * @author    Benjamin Mannal <benjamin.mannal@gmail.com>
  * @version   $Id$
  */
+
 class Ingredient
 {
 	/**
@@ -29,13 +30,46 @@ class Ingredient
 	 * @var int
 	 */
 	private $id;
-	
+
 	/**
 	 * @Column(type="string", length=255)
 	 * 
 	 * @var string
 	 */
 	private $name;
-	
-	
+
+	/**
+	 * @return the int
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
+
+	/**
+	 * @param  $id
+	 */
+	public function setId($id)
+	{
+		$this->id = $id;
+		return $this;
+	}
+
+	/**
+	 * @return the string
+	 */
+	public function getName()
+	{
+		return $this->name;
+	}
+
+	/**
+	 * @param  $name
+	 */
+	public function setName($name)
+	{
+		$this->name = $name;
+		return $this;
+	}
+
 }
