@@ -15,7 +15,7 @@ namespace application\models;
  * @author    Benjamin Mannal <benjamin.mannal@gmail.com>
  * @version   $Id$
  */
-class Ingredients
+class Ingredient
 {
 	/**
 	 * Eindeutige laufende Nummer der Abneigungen
