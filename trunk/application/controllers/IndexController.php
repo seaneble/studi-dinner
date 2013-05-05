@@ -39,6 +39,12 @@ class IndexController extends Zend_Controller_Action
 			$this->em->flush();
 			
 			// E-Mail mit Bestätigungslink verschicken
+			$mail = new \Zend_Mail();
+			$mail->setBodyText('Variabler Link und Freischaltung des Accounts');
+			$mail->setFrom('dinner@stuv-stuttgart.de', 'Dinner-Team');
+			$mail->addTo($person->getEmail(), $person->getFirstName() . ' ' . $person->getLastName());
+			$mail->setSubject('Deine Anmeldung - E-Mail-Adresse verifizieren');
+			$mail->send();
 			
 			$this->_helper->redirector->_redirect(array('controller' => 'index', 'action' => 'token_explanation'));
 			
