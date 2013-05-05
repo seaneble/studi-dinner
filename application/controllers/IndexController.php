@@ -39,12 +39,18 @@ class IndexController extends Zend_Controller_Action
 			$this->em->flush();
 			
 			// E-Mail mit Bestätigungslink verschicken
+			$config = array('auth' => 'login',
+					'username' => 'm027acc5',
+					'password' => 'PUustq4r7pDT2tvc');
+			 
+			$transport = new Zend_Mail_Transport_Smtp('smtp.stuv-stuttgart.de', $config);
+			
 			$mail = new \Zend_Mail();
 			$mail->setBodyText('http://dinner.local.sebastianleitz.de/token?token=' . $token);
 			$mail->setFrom('dinner@stuv-stuttgart.de', 'Dinner-Team');
 			$mail->addTo($person->getEmail(), $person->getFirstName() . ' ' . $person->getLastName());
 			$mail->setSubject('Deine Anmeldung - E-Mail-Adresse verifizieren');
-			$mail->send();
+			$mail->send($transport);
 			
 			$this->_helper->redirector->_redirect(array('controller' => 'index', 'action' => 'token_explanation'));
 			
