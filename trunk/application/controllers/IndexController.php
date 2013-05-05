@@ -30,7 +30,8 @@ class IndexController extends Zend_Controller_Action
 			       ->setAddressDetails($data['address_details'])
 			       ->setPhone($data['phone'])
 			       ->setEmail($data['email'])
-			       ->setPassword($data['password']);
+			       ->setPassword($data['password'])
+				   ->setActive(false);
 //			       ->set($data[''])
 			
 			$this->em->persist($person);
