@@ -15,7 +15,8 @@ class IndexController extends Zend_Controller_Action
 		
 		$request = $this->getRequest();
 		
-		$form = new \application\forms\Register;
+		$register_form = new \application\forms\Register();
+		$login_form = new \application\forms\Login();
 		
 		if($request->isPost() && $form->isValid($data = $request->getPost()))
 		{
@@ -36,6 +37,8 @@ class IndexController extends Zend_Controller_Action
 			$this->em->flush();
 		}
 		
-		$this->view->form = $form;
+		$this->view->register_form = $register_form;
+		$this->view->login_form = $login_form;
+
 	}
 }
