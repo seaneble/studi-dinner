@@ -10,6 +10,16 @@ class IndexController extends Zend_Controller_Action
 	
 	public function indexAction()
 	{
+		// Unangemeldete Benutzer auf Login-Seite weiterleiten
+		
+		// Nächste Veranstaltungen anzeigen
+		
+		// Formular persönliche Daten anzeigen
+		
+	}
+	
+	public function loginAction()
+	{
 		$result = $this->em->getRepository('\application\models\Event')->findAll();
 		$this->view->events = $result;
 		
