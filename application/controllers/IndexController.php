@@ -30,7 +30,7 @@ class IndexController extends Zend_Controller_Action
 			       ->setAddressDetails($data['address_details'])
 			       ->setPhone($data['phone'])
 			       ->setEmail($data['email'])
-			       ->setPassword($data['password'])
+			       ->setPassword(hash('sha256', $data['password']))
 			       ->setActive(false)
 			       ->setToken($token = hash('sha256', $data['email'] . 'sepp'));
 //			       ->set($data[''])
