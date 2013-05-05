@@ -42,7 +42,7 @@ class Register extends \Zend_Form
 		$email->setRequired(true);
 		$email->addValidator(new \Zend_Validate_EmailAddress());
 		
-		$password = new \Zend_Form_Element_Text('password');
+		$password = new \Zend_Form_Element_Password('password');
 		$password->setLabel('Passwort');
 		$password->setRequired(true);
 			
