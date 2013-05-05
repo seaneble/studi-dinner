@@ -157,6 +157,13 @@ class Person {
 	 */
 	private $active;
 	
+	/**
+	 * @Column(type="string")
+	 *
+	 * @var string
+	 */
+	private $token;
+	
 	public function __construct()
 	{
 		$this->ingredients   = new \Doctrine\Common\Collections\ArrayCollection();
@@ -418,6 +425,18 @@ class Person {
 		$this->active = $active;
 		return $this;
 	}
+
+	public function getToken() 
+	{
+		return $this->token;
+	}
+	
+	public function setToken($token) 
+	{
+		$this->token = $token;
+		return $this;
+	}
+	
 	
 
 }
