@@ -1,0 +1,14 @@
+RewriteEngine On
+#RewriteCond %{REMOTE_ADDR} !^62\.214\.141\.190$
+#RewriteRule ^.*$ wartung.html [L]
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+RewriteRule ^.*$ index.php [NC,L]
+
+AddDefaultCharset UTF-8
+#SetEnv APPLICATION_ENV "production"
+SetEnv APPLICATION_ENV "development"
+
+DirectoryIndex index.php index.html
