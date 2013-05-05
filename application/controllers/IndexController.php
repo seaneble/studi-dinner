@@ -63,6 +63,29 @@ class IndexController extends Zend_Controller_Action
 	
 	public function tokenAction()
 	{
-		
+		$request = $this->getRequest();
+			
+		if($token = $request->getParam('token'))
+		{
+			$this->view->token_value = true;
+			
+			$person = $this->em->getRepository('\application\models\Person')->findOneBy(array('token' => $token));
+			if($person === null)
+			{
+				$this->view->token_exists = false;
+				return true;
+			}
+			$this->view->token_exists = true;
+			
+			$person->setToken(null)
+			       ->setActive(true);
+			
+			$this->em->persist($person);
+			$this->em->flush();
+		}
+		else
+		{
+			$this->view->token_value = false;
+		}
 	}
 }
