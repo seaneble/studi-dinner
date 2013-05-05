@@ -9,8 +9,8 @@ class Login extends \Zend_Form
 		$email = new \Zend_Form_Element_Text('username');
 		$email->setLabel('E-Mail');
 		$email->setRequired(true);
-		
-		$password = new \Zend_Form_Element_Text('login_password');
+				
+		$password = new \Zend_Form_Element_Password('login_password');
 		$password->setLabel('Passwort');
 		$password->setRequired(true);
 			
