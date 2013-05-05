@@ -18,7 +18,7 @@ class IndexController extends Zend_Controller_Action
 		$register_form = new \application\forms\Register();
 		$login_form = new \application\forms\Login();
 		
-		if($request->isPost() && $form->isValid($data = $request->getPost()))
+		if($request->isPost() && $register_form->isValid($data = $request->getPost()))
 		{
 			$person = new \application\models\Person();
 			$person->setFirstName($data['firstname'])
