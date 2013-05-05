@@ -10,7 +10,10 @@ namespace application\models;
  * Vorlieben gespeichert.
  *
  * @Entity
- * @Table(name="person")
+ * @Table(
+ *     name="person",
+ * 	   uniqueConstraints={@UniqueConstraint(name="token_unique", columns={"token"})}
+ * )
  *
  * @copyright 2013 DHBW StuV Stuttgart
  * @author    Matthias Holetzko <mholetzko@gmx.net>
