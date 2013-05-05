@@ -31,7 +31,8 @@ class IndexController extends Zend_Controller_Action
 			       ->setPhone($data['phone'])
 			       ->setEmail($data['email'])
 			       ->setPassword($data['password'])
-			       ->setActive(false);
+			       ->setActive(false)
+			       ->setToken(hash('sha256', $data['email'] . 'sepp'));
 //			       ->set($data[''])
 			
 			$this->em->persist($person);
@@ -39,7 +40,7 @@ class IndexController extends Zend_Controller_Action
 			
 			// E-Mail mit Bestätigungslink verschicken
 			
-			$this->_helper->redirector->_redirect('controller' => 'index', 'action' => 'token_explanation');
+			$this->_helper->redirector->_redirect(array('controller' => 'index', 'action' => 'token_explanation'));
 			
 		}
 		
