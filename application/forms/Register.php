@@ -55,6 +55,6 @@ class Register extends \Zend_Form
 		$submit->setLabel('Anmelden');
 		
 		$this->addElements(array($firstname, $lastname, $address_street, $address_number, 
-				$address_zip, $address_city, $address_details, $phone, $email, $password, $submit));
+				$address_zip, $address_city, $address_details, $phone, $email, $password, $passwordcheck, $submit));
 	}
 }
