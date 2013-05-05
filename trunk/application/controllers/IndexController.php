@@ -52,12 +52,17 @@ class IndexController extends Zend_Controller_Action
 			$mail->setSubject('Deine Anmeldung - E-Mail-Adresse verifizieren');
 			$mail->send($transport);
 			
-			$this->_helper->redirector->_redirect(array('controller' => 'index', 'action' => 'token_explanation'));
+			$this->_helper->redirector('index', 'token');
 			
 		}
 		
 		$this->view->register_form = $register_form;
 		$this->view->login_form = $login_form;
 
+	}
+	
+	public function tokenAction()
+	{
+		
 	}
 }
