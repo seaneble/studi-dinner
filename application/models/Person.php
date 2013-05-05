@@ -150,6 +150,13 @@ class Person {
 	 */
 	private $ingredients;
 	
+	/**
+	 * @Column(type="Boolean")
+	 *
+	 * @var Boolean
+	 */
+	private $active;
+	
 	public function __construct()
 	{
 		$this->ingredients   = new \Doctrine\Common\Collections\ArrayCollection();
@@ -394,5 +401,23 @@ class Person {
 		$this->ingredients = $ingredients;
 		return $this;
 	}
+
+	/**
+	 * @return the Boolean
+	 */
+	public function getActive() 
+	{
+		return $this->active;
+	}
+	
+	/**
+	 * @param  $active
+	 */
+	public function setActive( $active) 
+	{
+		$this->active = $active;
+		return $this;
+	}
+	
 
 }
