@@ -413,7 +413,7 @@ class Person {
 	/**
 	 * @param  $active
 	 */
-	public function setActive( $active) 
+	public function setActive($active) 
 	{
 		$this->active = $active;
 		return $this;
