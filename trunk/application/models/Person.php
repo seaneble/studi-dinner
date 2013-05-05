@@ -151,7 +151,7 @@ class Person {
 	private $ingredients;
 	
 	/**
-	 * @Column(type="Boolean")
+	 * @Column(type="boolean")
 	 *
 	 * @var Boolean
 	 */
