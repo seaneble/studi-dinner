@@ -32,7 +32,7 @@ class IndexController extends Zend_Controller_Action
 			       ->setEmail($data['email'])
 			       ->setPassword($data['password'])
 			       ->setActive(false)
-			       ->setToken(hash('sha256', $data['email'] . 'sepp'));
+			       ->setToken($token = hash('sha256', $data['email'] . 'sepp'));
 //			       ->set($data[''])
 			
 			$this->em->persist($person);
@@ -40,7 +40,7 @@ class IndexController extends Zend_Controller_Action
 			
 			// E-Mail mit Bestätigungslink verschicken
 			$mail = new \Zend_Mail();
-			$mail->setBodyText('Variabler Link und Freischaltung des Accounts');
+			$mail->setBodyText('http://dinner.local.sebastianleitz.de/token?token=' . $token);
 			$mail->setFrom('dinner@stuv-stuttgart.de', 'Dinner-Team');
 			$mail->addTo($person->getEmail(), $person->getFirstName() . ' ' . $person->getLastName());
 			$mail->setSubject('Deine Anmeldung - E-Mail-Adresse verifizieren');
