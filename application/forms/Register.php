@@ -24,6 +24,7 @@ class Register extends \Zend_Form
 		$address_zip = new \Zend_Form_Element_Text('address_zip');
 		$address_zip->setLabel('Postleitzahl');
 		$address_zip->setRequired(true);
+		$address_zip->addValidator(new \Zend_Validate_PostCode());
 		
 		$address_city = new \Zend_Form_Element_Text('address_city');
 		$address_city->setLabel('Stadt');
