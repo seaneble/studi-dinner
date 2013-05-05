@@ -155,7 +155,7 @@ class Person {
 	 *
 	 * @var Boolean
 	 */
-	private $active = 'false';
+	private $active;
 	
 	public function __construct()
 	{
