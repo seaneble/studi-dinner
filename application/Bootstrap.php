@@ -73,4 +73,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         return $entityManager;
     }
+    
+    protected function _initLocale()
+    {
+	    $locale = new \Zend_Locale('de_DE');
+	    \Zend_Registry::set('Zend_Locale', $locale);
+    }
 }
