@@ -45,7 +45,12 @@ class Register extends \Zend_Form
 		$password = new \Zend_Form_Element_Password('password');
 		$password->setLabel('Passwort');
 		$password->setRequired(true);
-			
+				
+		$passwordcheck = new \Zend_Form_Element_Password('passwordcheck');
+		$passwordcheck->setLabel('Passwort-Überprüfung');
+		$passwordcheck->setRequired(true);
+		$passwordcheck->addValidator(new \Zend_Validate_Identical(array('identical', false, array('token' => 'password'))));
+				
 		$submit = new \Zend_Form_Element_Submit('submit');
 		$submit->setLabel('Anmelden');
 		
