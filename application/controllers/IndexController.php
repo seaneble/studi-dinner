@@ -31,11 +31,16 @@ class IndexController extends Zend_Controller_Action
 			       ->setPhone($data['phone'])
 			       ->setEmail($data['email'])
 			       ->setPassword($data['password'])
-				   ->setActive(false);
+			       ->setActive(false);
 //			       ->set($data[''])
 			
 			$this->em->persist($person);
 			$this->em->flush();
+			
+			// E-Mail mit Bestätigungslink verschicken
+			
+			$this->_helper->redirector->_redirect('controller' => 'index', 'action' => 'token_explanation');
+			
 		}
 		
 		$this->view->register_form = $register_form;
