@@ -46,13 +46,13 @@ class IndexController extends Zend_Controller_Action
 			$transport = new Zend_Mail_Transport_Smtp('smtp.stuv-stuttgart.de', $config);
 			
 			$mail = new \Zend_Mail();
-			$mail->setBodyText('http://dinner.local.sebastianleitz.de/token?token=' . $token);
+			$mail->setBodyText('http://dinner.local.sebastianleitz.de/index/token?token=' . $token);
 			$mail->setFrom('dinner@stuv-stuttgart.de', 'Dinner-Team');
 			$mail->addTo($person->getEmail(), $person->getFirstName() . ' ' . $person->getLastName());
 			$mail->setSubject('Deine Anmeldung - E-Mail-Adresse verifizieren');
 			$mail->send($transport);
 			
-			$this->_helper->redirector('index', 'token');
+			$this->_helper->redirector('token', 'index');
 			
 		}
 		
