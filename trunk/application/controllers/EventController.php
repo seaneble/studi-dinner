@@ -7,4 +7,9 @@ class EventController extends Zend_Controller_Action
 		$registry = \Zend_Registry::getInstance();
 		$this->em = $registry->entitymanager;
 	}
+	
+	public function indexAction()
+	{
+		
+	}
 }
