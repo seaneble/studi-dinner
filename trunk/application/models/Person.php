@@ -161,7 +161,7 @@ class Person {
 	private $active;
 	
 	/**
-	 * @Column(type="string" , nullable=false)
+	 * @Column(type="string" , nullable=true)
 	 *
 	 * @var string
 	 */
