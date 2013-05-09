@@ -6,6 +6,9 @@ class Register extends \Zend_Form
 {
 	public function init()
 	{
+		$formName = new \Zend_Form_Element_Hidden('form_name');
+		$formName->setValue('register');
+		
 		$firstname = new \Zend_Form_Element_Text('firstname');
 		$firstname->setLabel('Vorname');
 		$firstname->setRequired(true);
@@ -52,9 +55,9 @@ class Register extends \Zend_Form
 		$passwordcheck->addValidator(new \Zend_Validate_Identical(array('token' => 'password')));
 				
 		$submit = new \Zend_Form_Element_Submit('submit');
-		$submit->setLabel('Anmelden');
+		$submit->setLabel('Registrieren');
 		
-		$this->addElements(array($firstname, $lastname, $address_street, $address_number, 
+		$this->addElements(array($formName, $firstname, $lastname, $address_street, $address_number, 
 				$address_zip, $address_city, $address_details, $phone, $email, $password, $passwordcheck, $submit));
 	}
 }

@@ -2,6 +2,7 @@
 
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
+	
     /**
      * Autoloader registrieren
      * 
@@ -23,9 +24,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $autoloader = new \Doctrine\Common\ClassLoader('Doctrine');
         $autoloader->register();
 
-        // ETES-Library laden
-//        $autoloader = new \Doctrine\Common\ClassLoader('ETES');
-//        $autoloader->register();
+        // StuV-Library laden
+        $autoloader = new \Doctrine\Common\ClassLoader('StuV');
+        $autoloader->register();
 
         // Models laden
         $autoloader = new \Doctrine\Common\ClassLoader(
@@ -34,6 +35,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         );
         $autoloader->register();
     }
+	
+	protected function _initSession()
+	{
+		\Zend_Session::start();
+	}
 
     protected function _initDoctrine()
     {
@@ -78,5 +84,28 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
 	    $locale = new \Zend_Locale('de_DE');
 	    \Zend_Registry::set('Zend_Locale', $locale);
+    }
+    
+    /**
+     * Konfiguration verfügbar machen
+     */
+    protected function _initConfig()
+    {
+        $config = new Zend_Config($this->getOptions(), true);
+        Zend_Registry::set('config', $config);
+    }
+    
+    /**
+     * Plugins initialisieren
+     * 
+     * * Plugin zur Authentifizierungskontrolle
+     */
+    protected function _initPlugins()
+    {
+        //require_once('StuV/Controller/Plugin/ClientAuthPlugin.php');
+        $front = Zend_Controller_Front::getInstance();
+        $front->registerPlugin(
+            new \StuV\Controller\Plugin\AuthPlugin()
+        );
     }
 }

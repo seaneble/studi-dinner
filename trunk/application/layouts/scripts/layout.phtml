@@ -12,6 +12,16 @@
 
 <img src="/files/dhbw-logo.png">
 
+<?php if(count($this->messages)): ?>
+<div class="messages">
+<ul>
+<?php foreach($this->messages as $message): ?>
+<li><?php echo $message; ?></li>
+<?php endforeach; ?>
+</ul>
+</div>
+<?php endif; ?>
+
 <nav>
 <ul>
 <li>Startseite</li>

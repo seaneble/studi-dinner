@@ -6,6 +6,9 @@ class Login extends \Zend_Form
 {
 	public function init()
 	{
+		$formName = new \Zend_Form_Element_Hidden('form_name');
+		$formName->setValue('login');
+		
 		$email = new \Zend_Form_Element_Text('username');
 		$email->setLabel('E-Mail');
 		$email->setRequired(true);
@@ -15,8 +18,8 @@ class Login extends \Zend_Form
 		$password->setRequired(true);
 			
 		$submit = new \Zend_Form_Element_Submit('submit_login');
-		$submit->setLabel('Einloggen');
+		$submit->setLabel('Anmelden');
 		
-		$this->addElements(array($email, $password, $submit));
+		$this->addElements(array($formName, $email, $password, $submit));
 	}
 }
