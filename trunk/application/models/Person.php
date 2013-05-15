@@ -87,11 +87,22 @@ class Person {
 	 * 
 	 * Denkbar sind Angaben wie „Durch den Hinterhof“, „blaues Klingelschild“, etc.
 	 * 
-	 * @Column(type="text")
+	 * @Column(type="text", nullable=true)
 	 *
 	 * @var string
 	 */
 	private $address_details;
+
+	/**
+	 * Name am Klingelschild
+	 * 
+	 * Diese Angabe erhalten die anderen Teilnehmer, um die richtige Wohnung zu finden.
+	 * 
+	 * @Column(type="text", nullable=false)
+	 *
+	 * @var string
+	 */
+	private $address_name = "Klingeln bei ";
 
 	/**
 	 * Telefonnummer
@@ -310,6 +321,23 @@ class Person {
 	public function setAddressDetails($address_details)
 	{
 		$this->address_details = $address_details;
+		return $this;
+	}
+
+	/**
+	 * @return the string
+	 */
+	public function getAddressName()
+	{
+		return $this->address_name;
+	}
+
+	/**
+	 * @param  $address_name
+	 */
+	public function setAddressName($address_name)
+	{
+		$this->address_name = $address_name;
 		return $this;
 	}
 
