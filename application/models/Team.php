@@ -32,7 +32,7 @@ class Team {
 	 * Der Name muss eindeutig sein, damit bei einer Veranstaltung planlos anrufende
 	 * Menschen sich eindeutig identifizieren können.
 	 * 
-	 * @Column(type="string", length=255)
+	 * @Column(type="string", length=255, nullable=true)
 	 *
 	 * @var string
 	 */
@@ -89,7 +89,7 @@ class Team {
 	 * Partner
 	 *
 	 * @ManyToOne(targetEntity="Person", inversedBy="teams_partner")
-	 * @JoinColumn(name="partner_person", referencedColumnName="id", nullable=false, onDelete="RESTRICT")
+	 * @JoinColumn(name="partner_person", referencedColumnName="id", nullable=true, onDelete="RESTRICT")
 	 *
 	 * @var Person|int
 	 */
@@ -104,6 +104,20 @@ class Team {
 	 * @var Event|int
 	 */
 	private $event;
+	
+	/**
+	 * @Column(type="boolean")
+	 *
+	 * @var Boolean
+	 */
+	private $random_partner = false;
+	
+	/**
+	 * @Column(type="boolean")
+	 *
+	 * @var Boolean
+	 */
+	private $confirmed = false;
 
 	public function __construct() 
 	{
@@ -244,6 +258,40 @@ class Team {
 	public function setEvent($event)
 	{
 		$this->event = $event;
+		return $this;
+	}
+
+	/**
+	 * @return the Boolean
+	 */
+	public function getRandomPartner()
+	{
+		return $this->random_partner;
+	}
+	
+	/**
+	 * @param  $active
+	 */
+	public function setRandomPartner($random_partner) 
+	{
+		$this->random_partner = $random_partner;
+		return $this;
+	}
+
+	/**
+	 * @return the Boolean
+	 */
+	public function getConfirmed()
+	{
+		return $this->confirmed;
+	}
+	
+	/**
+	 * @param  $confirmed
+	 */
+	public function setConfirmed($confirmed) 
+	{
+		$this->confirmed = $confirmed;
 		return $this;
 	}
 

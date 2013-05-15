@@ -48,6 +48,13 @@ class Event {
 	 */
 	private $teams;
 	
+	/**
+	 * @Column(type="boolean")
+	 *
+	 * @var Boolean
+	 */
+	private $active = false;
+	
 	public function __construct()
 	{
 		$this->teams = new \Doctrine\Common\Collections\ArrayCollection();
@@ -120,5 +127,16 @@ class Event {
 		$this->teams = $teams;
 		return $this;
 	}
-
+	
+	public function getActive()
+	{
+		return $this->active;
+	}
+	
+	public function setActive($active)
+	{
+		$this->active = $active;
+		return $this;
+	}
+	
 }

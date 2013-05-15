@@ -1,13 +1,31 @@
-
+<section id="left">
+<article>
+<h1>Für eine Veranstaltung anmelden</h1>
+<p>Bitte überprüfe deine persönlichen Daten (insbesondere die <strong>Allergien und Unverträglichkeiten</strong>) auf der rechten Seite, bevor du fortfährst!</p>
+</article>
+<article class="box orange">
 <h2>Kommende Veranstaltungen:</h2>
-
+<div class="content">
 <?php if(count($this->events)): ?>
 <ul>
 <?php foreach ($this->events as $event): ?>
-<li><strong><?php echo (date_format($event->getDate(), 'd.m.Y')); ?></strong>: <?php echo $event->getName(); ?></li>
+<li><?php if($event->getActive()): ?><strong><?php echo (date_format($event->getDate(), 'd.m.Y')); ?></strong>: <a href="<?php echo $this->url(array('controller'=>'event','action'=>'index','id'=>$event->getId()), null, FALSE); ?>"><?php echo $event->getName(); ?></a><?php else: ?><strong>Später</strong>: <?php echo $event->getName(); ?><?php endif; ?></li>
 <?php endforeach; ?>
 </ul>
 <?php else: ?>
-<p><strong>Momentan sind keine Veranstaltungen geplant.</strong></p>
+<p><strong>Momentan sind keine Veranstaltungen geplant.</strong><br>Schau doch bald wieder vorbei.</p>
 <?php endif; ?>
+</div>
+</article>
+</section>
+<section id="right">
+<article class="box green">
+<h2>Persönliche Daten</h2>
+<div class="content">
+<p>Sobald wir damit beginnen, den Fahrplan für einen Abend zusammenzustellen, können die Adressangaben nicht mehr geändert werden.</p>
 
+<p><strong>Hier fehlt das Formular „Persönliche Daten“.</strong></p>
+
+<?php echo $this->form; ?>
+</div>
+</section>

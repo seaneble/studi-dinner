@@ -12,7 +12,10 @@ namespace application\models;
  * @Entity
  * @Table(
  *     name="person",
- * 	   uniqueConstraints={@UniqueConstraint(name="token_unique", columns={"token"})}
+ * 	   uniqueConstraints={
+ *         @UniqueConstraint(name="token_unique", columns={"token"}),
+ *         @UniqueConstraint(name="email_unique", columns={"email"})
+ *     }
  * )
  *
  * @copyright 2013 DHBW StuV Stuttgart
@@ -439,7 +442,5 @@ class Person {
 		$this->token = $token;
 		return $this;
 	}
-	
-	
 
 }
