@@ -107,5 +107,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $front->registerPlugin(
             new \StuV\Controller\Plugin\AuthPlugin()
         );
+        $front->registerPlugin(
+            new \StuV\Controller\Plugin\MessengerPlugin()
+        );
     }
 }
