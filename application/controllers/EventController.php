@@ -70,6 +70,52 @@ class EventController extends Zend_Controller_Action
 			$this->view->form = $form;
 			$this->view->no_partner = false;
 			$this->view->confirm_partner = true;
+			
+			$host_person = $team->getHostPerson();
+			$partner_person = $team->getPartnerPerson();
+			
+			$form->getElement('addresses')->setMultiOptions(array(
+				$host_person->getId() => sprintf(
+					"%s<br>%s %s<br>%s%s %s",
+					$host_person->getAddressName(),
+					$host_person->getAddressStreet(),
+					$host_person->getAddressNumber(),
+					($host_person->getAddressDetails()) ? $host_person->getAddressDetails() . '<br>' : '',
+					$host_person->getAddressZip(),
+					$host_person->getAddressCity()
+				),
+				$partner_person->getId() => sprintf(
+					"%s<br>%s %s<br>%s<br>%s %s",
+					$partner_person->getAddressName(),
+					$partner_person->getAddressStreet(),
+					$partner_person->getAddressNumber(),
+					$partner_person->getAddressDetails(),
+					$partner_person->getAddressZip(),
+					$partner_person->getAddressCity()
+				),
+			))->setValue($host_person->getId());
+			
+			if($this->getRequest()->isPost())
+			{
+				if($form->isValid($data = $this->getRequest()->getPost()))
+			 	{
+			 		if($data['addresses'] != $host_person->getId())
+			 		{
+			 			$newHost = $this->em->getRepository('\application\models\Person')->findOneById($partner_person->getId());
+			 			$newPartner = $this->em->getRepository('\application\models\Person')->findOneById($host_person->getId());
+			 			$team->setHostPerson($newHost);
+			 			$team->setPartnerPerson($newPartner);
+			 			$this->em->persist($team);
+			 			$this->em->flush();
+			 		}
+			 		
+			 		$this->_helper->FlashMessenger('Die Daten wurden gespeichert.');
+					$this->_helper->redirector('index', 'event', null, array('id' => $this->event->getId()));
+			 	}
+			}
+			
+			return;
+
 		}
 		elseif($partner !== null)
 		{
@@ -140,61 +186,166 @@ Das Team vom Studi-Dinner."
 			$this->view->form = $form;
 			$this->view->no_partner = false;
 			$this->view->confirm_partner = true;
+			
+			$host_person = $team->getHostPerson();
+			$partner_person = $team->getPartnerPerson();
+			
+			$form->getElement('addresses')->setMultiOptions(array(
+				$host_person->getId() => sprintf(
+					"%s<br>%s %s<br>%s%s %s",
+					$host_person->getAddressName(),
+					$host_person->getAddressStreet(),
+					$host_person->getAddressNumber(),
+					($host_person->getAddressDetails()) ? $host_person->getAddressDetails() . '<br>' : '',
+					$host_person->getAddressZip(),
+					$host_person->getAddressCity()
+				),
+				$partner_person->getId() => sprintf(
+					"%s<br>%s %s<br>%s<br>%s %s",
+					$partner_person->getAddressName(),
+					$partner_person->getAddressStreet(),
+					$partner_person->getAddressNumber(),
+					$partner_person->getAddressDetails(),
+					$partner_person->getAddressZip(),
+					$partner_person->getAddressCity()
+				),
+			))->setValue($host_person->getId());
+			
+			if($this->getRequest()->isPost())
+			{
+				if($form->isValid($data = $this->getRequest()->getPost()))
+			 	{
+			 		if($data['addresses'] != $host_person->getId())
+			 		{
+			 			$newHost = $this->em->getRepository('\application\models\Person')->findOneById($partner_person->getId());
+			 			$newPartner = $this->em->getRepository('\application\models\Person')->findOneById($host_person->getId());
+			 			$team->setHostPerson($newHost);
+			 			$team->setPartnerPerson($newPartner);
+			 			$this->em->persist($team);
+			 			$this->em->flush();
+			 		}
+			 		
+			 		$this->_helper->FlashMessenger('Die Daten wurden gespeichert.');
+					$this->_helper->redirector('index', 'event', null, array('id' => $this->event->getId()));
+			 	}
+			}
+			
+			return;
 		}
 		
 		// Jetzt hat der Benutzer die volle Wahl
 		else
 		{
 			$form = new \application\forms\PartnerSearch();
+			
+			foreach($form->getElements() as $element)
+				$element->removeDecorator('Errors');
+			
 			$this->view->form = $form;
 			
-			if($this->getRequest()->isPost() && $form->isValid($data = $this->getRequest()->getPost()))
+			if($this->getRequest()->isPost())
 			{
-				if($this->event->getId() === null)
+				if($form->isValid($data = $this->getRequest()->getPost()))
+			 	{
+					if($this->event->getId() === null)
+					{
+						$form->getElement('name')->addError('Die Veranstaltung existiert nicht.');
+						
+					    $this->_helper->FlashMessenger('Im Suchformular traten Fehler auf.');
+					    
+					    foreach($form->getMessages() as $field => $message)
+					    {
+					    	$this->_helper->FlashMessenger('Das Feld <strong>' . $form->getElement($field)->getLabel() . '</strong> meldet: ' . implode(', ', $message));
+					    	
+					    	$form->getElement($field)->getDecorator('Label')->setTagClass('error');
+						}
+					    
+						return;
+					}
+					
+					$name = explode(' ', $data['name']);
+					if(count($name) !== 2)
+					{
+						$form->getElement('name')->addError('Vorname und Nachname angeben!');
+						
+					    $this->_helper->FlashMessenger('Im Suchformular traten Fehler auf.');
+					    
+					    foreach($form->getMessages() as $field => $message)
+					    {
+					    	$this->_helper->FlashMessenger('Das Feld <strong>' . $form->getElement($field)->getLabel() . '</strong> meldet: ' . implode(', ', $message));
+					    	
+					    	$form->getElement($field)->getDecorator('Label')->setTagClass('error');
+						}
+					    
+						return;
+					}
+					
+					$partner_person = $this->em->getRepository('\application\models\Person')->findOneBy(array('firstname' => $name[0], 'lastname' => $name[1]));
+					if($partner_person === null)
+					{
+						$form->getElement('name')->addError('Diese Person konnte nicht gefunden werden.');
+						
+					    $this->_helper->FlashMessenger('Im Suchformular traten Fehler auf.');
+					    
+					    foreach($form->getMessages() as $field => $message)
+					    {
+					    	$this->_helper->FlashMessenger('Das Feld <strong>' . $form->getElement($field)->getLabel() . '</strong> meldet: ' . implode(', ', $message));
+					    	
+					    	$form->getElement($field)->getDecorator('Label')->setTagClass('error');
+						}
+					    
+						return;
+					}
+					if($partner_person->getId() == $this->currentUser->getId())
+					{
+						$form->getElement('name')->addError('Mit dir selbst kannst du kein Team bilden.');
+						
+					    $this->_helper->FlashMessenger('Im Suchformular traten Fehler auf.');
+					    
+					    foreach($form->getMessages() as $field => $message)
+					    {
+					    	$this->_helper->FlashMessenger('Das Feld <strong>' . $form->getElement($field)->getLabel() . '</strong> meldet: ' . implode(', ', $message));
+					    	
+					    	$form->getElement($field)->getDecorator('Label')->setTagClass('error');
+						}
+					    
+						return;
+					}
+					
+					$team = new \application\models\Team();
+					$team->setHostPerson($this->currentUser)
+					     ->setPartnerPerson($partner_person)
+					     ->setEvent($this->event);
+					
+					$this->em->persist($team);
+					$this->em->flush();
+					
+					$this->sendMail(
+						$partner_person,
+						$this->event->getName() . ': Ein Team bilden',
+	"Hallo,
+	
+	" . $this->currentUser->getFirstname() . " " . $this->currentUser->getLastname() . " möchte mit dir am " . $this->event->getName() . " teilnehmen. Auf der folgenden Seite kannst du die Anfrage annehmen: http://dinner.local.sebastianleitz.de/event/index/id/" . $this->event->getId() . ".
+	
+	Das Team vom Studi-Dinner."
+					);
+					
+					$this->_helper->FlashMessenger('An deinen Wunschpartner wurde eine E-Mail verschickt.');
+					$this->_helper->redirector('index', 'event', null, array('id' => $this->event->getId()));
+				}
+				else
 				{
-					$form->getElement('name')->addError('Die Veranstaltung existiert nicht.');
+				    $this->_helper->FlashMessenger('Im Suchformular traten Fehler auf.');
+				    
+				    foreach($form->getMessages() as $field => $message)
+				    {
+				    	$this->_helper->FlashMessenger('Das Feld <strong>' . $form->getElement($field)->getLabel() . '</strong> meldet: ' . implode(', ', $message));
+				    	
+				    	$form->getElement($field)->getDecorator('Label')->setTagClass('error');
+					}
+				    
 					return;
 				}
-				
-				$name = explode(' ', $data['name']);
-				if(count($name) !== 2)
-				{
-					$form->getElement('name')->addError('Vorname und Nachname angeben!');
-					return;
-				}
-				
-				$partner_person = $this->em->getRepository('\application\models\Person')->findOneBy(array('firstname' => $name[0], 'lastname' => $name[1]));
-				if($partner_person === null)
-				{
-					$form->getElement('name')->addError('Diese Person konnte nicht gefunden werden.');
-					return;
-				}
-				if($partner_person->getId() == $this->currentUser->getId())
-				{
-					$form->getElement('name')->addError('Mit dir selbst kannst du kein Team bilden.');
-					return;
-				}
-				
-				$team = new \application\models\Team();
-				$team->setHostPerson($this->currentUser)
-				     ->setPartnerPerson($partner_person)
-				     ->setEvent($this->event);
-				
-				$this->em->persist($team);
-				$this->em->flush();
-				
-				$this->sendMail(
-					$partner_person,
-					$this->event->getName() . ': Ein Team bilden',
-"Hallo,
-
-" . $this->currentUser->getFirstname() . " " . $this->currentUser->getLastname() . " möchte mit dir am " . $this->event->getName() . " teilnehmen. Auf der folgenden Seite kannst du die Anfrage annehmen: http://dinner.local.sebastianleitz.de/event/index/id/" . $this->event->getId() . ".
-
-Das Team vom Studi-Dinner."
-				);
-				
-				$this->_helper->FlashMessenger('An deinen Wunschpartner wurde eine E-Mail verschickt.');
-				$this->_helper->redirector('index', 'event', null, array('id' => $this->event->getId()));
 			}
 			
 			return;
