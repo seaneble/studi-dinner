@@ -1,0 +1,29 @@
+<section id="left" class="login">
+<article>
+<h1>Studi-Dinner 2.0</h1>
+<p><strong><a href="<?php echo $this->url(array('controller'=>'index','action'=>'info'), null, FALSE); ?>">Was ist das?</a></strong></p>
+Am <strong>6.6.</strong> findet das zweite Studi-Dinner an der DHBW Stuttgart statt (nicht wundern, falls ihr den Namen nicht kennt, wir mussten ihn leider ändern).</p>
+<p>Die <strong>Kurzfassung</strong> für die Hungrigen: Rechts einzeln registrieren, Mail abwarten (Spam-Ordner?), unten anmelden, <strong>Allergien</strong> eintragen, Veranstaltung wählen, Partner finden,…&nbsp;, Essen! <a href="<?php echo $this->url(array('controller'=>'index','action'=>'info'), null, FALSE); ?>">Mehr Infos</a>.</p>
+<p><strong>Neu!</strong> Ihr könnt euch auch alleine anmelden, und wir losen euch im Vorfeld einen Kochpartner zu – so könnt ihr sogar <strong>13</strong> neue Personen kennenlernen und der Abend wird noch viel lustiger!</p>
+<p>Viel Spaß wünscht euch euer <strong>Dinner-Team</strong> von der Studierendenvertretung!</p>
+</article>
+<article class="green box">
+<h2>Mit vorhandenen Daten anmelden</h2>
+<div class="content">
+<p><strong>Hinweis:</strong> Die Daten vom letzten Mal sind nicht mehr gültig.</p>
+<?php echo $this->login_form; ?>
+<p>Passwort vergessen? Per E-Mail schicken wir euch gerne ein neues zu: <a href="mailto:&#100;&#x69;&#x6E;&#110;&#x65;&#x72;&#x40;&#115;&#116;&#x75;&#x76;&#x2D;&#115;&#x74;&#x75;&#x74;&#116;&#103;&#x61;&#114;&#x74;&#46;&#100;&#x65;?subject=Passwort%20vergessen&amp;body=E-Mail-Adresse%20angeben,%20falls%20du%20von%20einer%20anderen%20Adresse%20aus%20schreibst.
+">&#100;&#x69;&#x6E;&#110;&#x65;&#x72;&#x40;&#115;&#116;&#x75;&#x76;&#x2D;&#115;&#x74;&#x75;&#x74;&#116;&#103;&#x61;&#114;&#x74;&#46;&#100;&#x65;</a>.</p>
+</div>
+</article>
+</section>
+
+<section id="right" class="login">
+<article class="box orange">
+<h2>Registrieren</h2>
+<div class="content">
+<p>Bitte als Einzelpersonen anmelden, Teams werden erst im nächsten Schritt gebildet. Wir verwenden diese Daten nur, um die Teams untereinander zu vernetzen, euch bei Problemen Hilfe zu leisten und Werbung für die nächste Veranstaltung zu machen. Sonst nichts.</p>
+<?php echo $this->register_form; ?>
+</div>
+</article>
+</section>

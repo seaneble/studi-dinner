@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="de"> 
+<head>
+<title>Studi-Dinner 6.6.</title>
+<meta charset="UTF-8">
+<base url="http://dinner.local.sebastianleitz.de/">
+<link rel="stylesheet" media="screen, projection, tv" href="/css/screen.css">
+<link rel="stylesheet" media="screen", href="/css/chosen.css">
+<script src="/scripts/jquery.js"></script>
+<script src="/scripts/chosen.jquery.js"></script>
+</head>
+<body ontouchstart="">
+
+<div id="wrapper">
+<header>
+<ul class="image">
+<li><a href="<?php echo $this->url(array('controller'=>'index','action'=>'index'), null, FALSE); ?>" title="Zur Startseite">Startseite</a></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li><?php if($this->login): ?><a href="<?php echo $this->url(array('controller'=>'index','action'=>'logout'), null, FALSE); ?>" title="Abmelden">Abmelden</a><?php endif; ?></li>
+</ul>
+
+<?php if(count($this->messages)): ?>
+<div class="messages">
+<ul>
+<?php foreach($this->messages as $message): ?>
+<li><?php echo $message; ?></li>
+<?php endforeach; ?>
+</ul>
+</div>
+<?php endif; ?>
+</header>
+
+<div id="main">
+<?php echo $this->layout()->content ?>
+</div>
+
+<footer>
+<p>Das Studi-Dinner ist eine Veranstaltung der <a href="http://www.dhbw-stuttgart.de/themen/wir-ueber-uns/interessenvertretungen/studierendenvertretung.html">Studierendenvertretung der DHBW Stuttgart</a>. Kontakt: <a href="mailto:&#100;&#x69;&#x6E;&#110;&#x65;&#x72;&#x40;&#115;&#116;&#x75;&#x76;&#x2D;&#115;&#x74;&#x75;&#x74;&#116;&#103;&#x61;&#114;&#x74;&#46;&#100;&#x65;
+">&#100;&#x69;&#x6E;&#110;&#x65;&#x72;&#x40;&#115;&#116;&#x75;&#x76;&#x2D;&#115;&#x74;&#x75;&#x74;&#116;&#103;&#x61;&#114;&#x74;&#46;&#100;&#x65;</a></p>
+</footer>
+</div>
+
+<script>
+$(".chosen").chosen({
+	no_results_text: "Wert nicht gefunden: ",
+    placeholder_text_single: "Eine Option auswählen",
+    placeholder_text_multiple: "Mehrere Optionen auswählen"
+});
+</script>
+
+</body>
+</html>
