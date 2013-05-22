@@ -13,13 +13,111 @@ class IndexController extends Zend_Controller_Action
 	
 	public function indexAction()
 	{
+		$user = \Zend_Auth::getInstance();
+		$user = $user->getIdentity();
+		$user = $user['object'];
+		$user = $this->em->getRepository('\application\models\Person')->findOneById($user->getId());
+		
 		// Nächste Veranstaltungen anzeigen
 		$q = $this->em->createQuery("select e from \application\models\Event e where e.date >= :today")
     ->setParameter('today', new \DateTime());
 		$this->view->events = $q->getResult();
 		
 		// Formular persönliche Daten anzeigen
+		$form = new \application\forms\Profile();
 		
+		$form->getElement('dislikes')
+		     ->setMultiOptions($this->getIngredients());
+		
+		$form->populate(array(
+		    'firstname' => $user->getFirstname(),
+		    'lastname' => $user->getLastname(),
+		    'address_street' => $user->getAddressStreet(),
+		    'address_number' => $user->getAddressNumber(),
+		    'address_zip' => $user->getAddressZip(),
+		    'address_city' => $user->getAddressCity(),
+		    'address_details' => $user->getAddressDetails(),
+		    'phone' => $user->getPhone(),
+		    'email' => $user->getEmail(),
+		));
+		
+		if(count($user->getIngredients()))
+		{
+		    $arrDislikes = array();
+		    foreach($user->getIngredients() as $dislike)
+		        $arrDislikes[] = $dislike->getId();
+    		$form->getElement('dislikes')->setValue($arrDislikes);
+		}
+		
+		if($this->getRequest()->isPost())
+		{
+			if($form->isValid($data = $this->getRequest()->getPost()))
+			{
+			    if(strlen($data['password']))
+			    {
+    			    $user->setPassword(\StuV\Auth\Adapter::encryptPassword($data['password']));
+			    }
+			    $user->setFirstname($data['firstname'])
+			         ->setLastname($data['lastname'])
+			         ->setAddressStreet($data['address_street'])
+			         ->setAddressNumber($data['address_number'])
+			         ->setAddressZip($data['address_zip'])
+			         ->setAddressCity($data['address_city'])
+			         ->setAddressDetails($data['address_details'])
+			         ->setPhone($data['phone'])
+			         ->setEmail($data['email']);
+			    
+			    if(count($data['dislikes']))
+			    {
+			        $arrIngredients = array();
+    			    foreach($data['dislikes'] as $id)
+    			    {
+    			        $arrIngredients[] = $this->em->getRepository('\application\models\Ingredient')->find($id);
+    			    }
+    			    $user->setIngredients($arrIngredients);
+			    }
+			    else
+			    {
+    			    $user->setIngredients(null);
+			    }
+			    
+			    if(strlen($data['zutat']))
+			    {
+    			    $arrZutat = explode(',', $data['zutat']);
+			        $arrIngredients = array();
+    			    foreach($arrZutat as $zutat)
+    			    {
+    			        $tempZutat = new \application\models\Ingredient();
+    			        $tempZutat->setName($zutat);
+    			        $this->em->persist($tempZutat);
+    			        
+    			        $arrIngredients[] = $tempZutat;
+    			    }
+    			    
+    			    $user->setIngredients(array_merge($arrIngredients, $user->getIngredients()));
+			    }
+			    
+			    $this->em->persist($user);
+			    $this->em->flush();
+			    
+			    $this->_helper->FlashMessenger('Deine Daten wurden gespeichert.');
+                $this->_helper->redirector('index', 'index');
+                
+                return;
+			}
+			
+			$form->populate($data);
+		    $this->_helper->FlashMessenger('Im Formular traten Fehler auf.');
+		    
+		    foreach($form->getMessages() as $field => $message)
+		    {
+		    	$this->_helper->FlashMessenger('Das Feld <strong>' . $form->getElement($field)->getLabel() . '</strong> meldet: ' . implode(', ', $message));
+		    	
+		    	$form->getElement($field)->getDecorator('Label')->setTagClass('error');
+			}
+        }
+		
+		$this->view->form = $form;
 	}
 	
 	public function loginAction()
@@ -189,6 +287,10 @@ class IndexController extends Zend_Controller_Action
 		}
 	}
 	
+	public function infoAction()
+	{
+	}
+	
 	/**
      * Benutzer abmelden und auf Login-Seite weiterleiten
      */
@@ -198,6 +300,19 @@ class IndexController extends Zend_Controller_Action
         
         $this->_helper->FlashMessenger('Du wurdest erfolgreich abgemeldet.');
         $this->_helper->redirector('index');
+    }
+    
+    protected function getIngredients()
+    {
+        $result = $this->em->getRepository('\application\models\Ingredient')->findAll();
+        $ingredients = array();
+        
+        foreach($result as $ingredient)
+        {
+            $ingredients[$ingredient->getId()] = $ingredient->getName();
+        }
+        
+        return $ingredients;
     }
 
 }

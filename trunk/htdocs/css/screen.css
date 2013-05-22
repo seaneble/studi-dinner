@@ -211,6 +211,13 @@ form input[type=submit], a.button {
 	padding: 5px 20px;
 	text-decoration: none;
 }
+form select, form p.description {
+    width: 226px;
+}
+form ul.errors {
+    width: 180px;
+}
+
 .box.orange input[type=submit], .box.orange a.button {
 	background: #62cc00; /* Old browsers */
 	background: -moz-linear-gradient(top,  #8fc800 0%, #62cc00 100%); /* FF3.6+ */
@@ -231,7 +238,7 @@ form input[type=submit], a.button {
 	background: linear-gradient(to bottom,  #62cc00 0%,#8fc800 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#62cc00', endColorstr='#8fc800',GradientType=0 ); /* IE6-9 */
 }
-.box.green input[type=submit] {
+.box.green input[type=submit], .box.green a.button {
 	background: #ff670f; /* Old browsers */
 	background: -moz-linear-gradient(top,  #f7b50e 0%, #ff670f 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f7b50e), color-stop(100%,#ff670f)); /* Chrome,Safari4+ */
@@ -241,7 +248,7 @@ form input[type=submit], a.button {
 	background: linear-gradient(to bottom,  #f7b50e 0%,#ff670f 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7b50e', endColorstr='#ff670f',GradientType=0 ); /* IE6-9 */
 }
-.box.green input[type=submit]:active, .box.green input[type=submit]:focus, .box.green input[type=submit]:hover {
+.box.green input[type=submit]:active, .box.green input[type=submit]:focus, .box.green input[type=submit]:hover, .box.green a.button:hover, .box.green a.button:focus, .box.green a.button:active {
 	background: #f7b50e; /* Old browsers */
 	background: -moz-linear-gradient(top,  #ff670f 0%, #f7b50e 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff670f), color-stop(100%,#f7b50e)); /* Chrome,Safari4+ */

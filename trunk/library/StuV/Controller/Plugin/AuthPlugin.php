@@ -7,7 +7,7 @@ class AuthPlugin extends \Zend_Controller_Plugin_Abstract
 	
 	public function dispatchLoopStartup(\Zend_Controller_Request_Abstract $request)
     {
-        if($request->getControllerName() == 'index' && ($request->getActionName() == 'login' || $request->getActionName() == 'token'))
+        if($request->getControllerName() == 'index' && ($request->getActionName() == 'login' || $request->getActionName() == 'token' || $request->getActionName() == 'info'))
         {
             return;
         }

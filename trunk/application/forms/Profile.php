@@ -2,38 +2,10 @@
 
 namespace application\forms;
 
-class Register extends \Zend_Form
+class Profile extends \Zend_Form
 {
 	public function init()
 	{
-		$vorname = array(
-			'Kerstin',
-			'Michael',
-			'Doris',
-			'Steffen',
-			'Marie'
-		);
-		$nachname = array(
-		    'Schmidt',
-		    'Graskorn',
-		    'Schneider',
-		    'Herzog',
-		    'Ladwig',
-		);
-		$str = array(
-		    'Hauptstraße',
-		    'Gaißgasse',
-		    'Am Friedhof',
-		    'Erdbeeräcker',
-		    'Schlossallee',
-		);
-		$stadt = array(
-		    'Esslingen',
-		    'Stuttgart',
-		    'Fellbach',
-		    'Filterstadt',
-		    'Ludwigsburg',
-		);
 		$anm = array(
 		    'Hinterhof',
 		    '',
@@ -41,15 +13,8 @@ class Register extends \Zend_Form
 		    '',
 		    'Zugang durch den Laden',
 		);
-		$domains = array(
-			'gmx.de',
-			'web.de',
-			'gmail.com',
-			'hotmail.com',
-			'yahoo.de',
-		);
 		
-		$buchstaben = new \Zend_Validate_Alpha(true);
+    	$buchstaben = new \Zend_Validate_Alpha(true);
 		$buchstaben->setMessage('Es dürfen nur Buchstaben eingegeben werden');
 		
 		$notEmpty = new \Zend_Validate_NotEmpty();
@@ -73,7 +38,6 @@ class Register extends \Zend_Form
 		$firstname = new \Zend_Form_Element_Text('firstname');
 		$firstname->setLabel('Vorname')
 		          ->addValidator($buchstaben)
-		          ->setAttrib('placeholder', $vorname[rand(0,4)])
 		          ->addValidator($notEmpty)
 		          ->setAttrib('required', true)
 		          ->setRequired(true);
@@ -81,27 +45,23 @@ class Register extends \Zend_Form
 		$lastname = new \Zend_Form_Element_Text('lastname');
 		$lastname->setLabel('Nachname')
 		         ->addValidator($buchstaben)
-		         ->setAttrib('placeholder', $nachname[rand(0,4)])
 		         ->addValidator($notEmpty)
 		         ->setRequired(true);
 		
 		$address_street = new \Zend_Form_Element_Text('address_street');
 		$address_street->setLabel('Straße')
-					   ->setAttrib('placeholder', $str[rand(0,4)])
 					   ->addValidator($notEmpty)
 					   ->setAttrib('required', true)
 		               ->setRequired(true);
 		
 		$address_number = new \Zend_Form_Element_Text('address_number');
 		$address_number->setLabel('Hausnummer')
-		               ->setAttrib('placeholder', rand(0,120))
 		               ->addValidator($notEmpty)
 		               ->setAttrib('required', true)
 		               ->setRequired(true);
 		
 		$address_zip = new \Zend_Form_Element_Text('address_zip');
 		$address_zip->setLabel('Postleitzahl')
-		            ->setAttrib('placeholder', sprintf("70%03d", rand(0,999)))
 		            ->addValidator($notEmpty)
 		            ->setAttrib('required', true)
 		            ->setRequired(true)
@@ -109,7 +69,6 @@ class Register extends \Zend_Form
 		
 		$address_city = new \Zend_Form_Element_Text('address_city');
 		$address_city->setLabel('Stadt')
-		             ->setAttrib('placeholder', $stadt[rand(0,4)])
 		             ->addValidator($notEmpty)
 		             ->setAttrib('required', true)
 		             ->setRequired(true);
@@ -120,39 +79,38 @@ class Register extends \Zend_Form
 		
 		$phone = new \Zend_Form_Element_Text('phone');
 		$phone->setLabel('Telefon')
-		      ->setAttrib('placeholder', sprintf("+49 1%d %08d", rand(50,79), rand(0,99999999)))
 		      ->addValidator($notEmpty)
 		      ->setAttrib('required', true)
 		      ->setRequired(true);
 		
 		$email = new \Zend_Form_Element_Text('email');
 		$email->setLabel('E-Mail')
-		      ->setAttrib('placeholder', sprintf("%s.%s@%s", strtolower($firstname->getAttrib('placeholder')), strtolower($lastname->getAttrib('placeholder')), $domains[rand(0,4)]))
 		      ->addValidator($notEmpty)
 		      ->setRequired(true)
 		      ->setAttrib('required', true)
 		      ->addValidator($emailAddress);
+        
+        $dislike = new \Zend_Form_Element_Multiselect('dislikes');
+        $dislike->setLabel('Ich mag nicht')
+                ->setOptions(array('class' => 'chosen'));
+        
+        $zutat = new \Zend_Form_Element_Text('zutat');
+        $zutat->setLabel('Neue Zutat hinzufügen')
+		      ->setAttrib('placeholder', 'Kommagetrennte Liste')
+		      ->setDescription('Allergien, die nicht in der Liste auftauchen, bitte hier eintragen.');
 		
 		$password = new \Zend_Form_Element_Password('password');
 		$password->setLabel('Passwort')
-		         ->setAttrib('placeholder', '••••••••')
-		         ->addValidator($laenge)
-		         ->addValidator($notEmpty)
-		         ->setAttrib('required', true)
-		         ->setRequired(true);
-				
+		         ->addValidator($laenge);
+        
 		$passwordcheck = new \Zend_Form_Element_Password('passwordcheck');
 		$passwordcheck->setLabel('Passwort-Überprüfung')
-		              ->setRequired(true)
-		              ->setAttrib('placeholder', '••••••••')
-		              ->addValidator($notEmpty)
-		              ->setAttrib('required', true)
 		              ->addValidator($gleichheit);
-				
+        
 		$submit = new \Zend_Form_Element_Submit('submit');
-		$submit->setLabel('Registrieren');
+		$submit->setLabel('Daten speichern');
 		
-		$this->addElements(array($formName, $firstname, $lastname, $address_street, $address_number, 
+		$this->addElements(array($formName, $dislike, $zutat, $firstname, $lastname, $address_street, $address_number, 
 				$address_zip, $address_city, $address_details, $phone, $email, $password, $passwordcheck, $submit));
 	}
 }

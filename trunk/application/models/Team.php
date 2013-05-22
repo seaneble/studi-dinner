@@ -9,7 +9,12 @@ namespace application\models;
  * eingeladen sind.
  * 
  * @Entity
- * @Table(name="team")
+ * @Table(
+ *     name="team",
+ * 	   uniqueConstraints={
+ *         @UniqueConstraint(name="name_unique", columns={"name"})
+ *     }
+ * )
  * 
  * @copyright 2013 DHBW StuV Stuttgart
  * @author    Sebastian Leitz <webmaster@stuv-stuttgart.de>
