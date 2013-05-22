@@ -1,8 +1,9 @@
 <section id="left" class="login">
-<article class="no-box">
+<article>
 <h1>Studi-Dinner 2.0</h1>
-<p>Am <strong>6.6.</strong> findet das zweite Studi-Dinner an der DHBW Stuttgart statt (nicht wundern, falls ihr den Namen nicht kennt, wir mussten ihn leider ändern).</p>
-<p>Für Uneingeweihte: Ihr meldet euch als Zweierteam an und sorgt an dem nämlichen Abend entweder für Vorspeise, Hauptgang oder Dessert – zu Gast bekommt ihr zwei euch hoffentlich vollkommen <strong>fremde Teams</strong>. Die anderen beiden Gänge servieren euch wiederum vollkommen fremde Gastgeber irgendwo in Stuttgart – ihr erhaltet lediglich die Adresse, zu der ihr kommen müsst. Mit etwas Glück lernt ihr so <strong>12 neue Menschen</strong> kennen!</p>
+<p><strong><a href="<?php echo $this->url(array('controller'=>'index','action'=>'info'), null, FALSE); ?>">Was ist das?</a></strong></p>
+Am <strong>6.6.</strong> findet das zweite Studi-Dinner an der DHBW Stuttgart statt (nicht wundern, falls ihr den Namen nicht kennt, wir mussten ihn leider ändern).</p>
+<p>Die <strong>Kurzfassung</strong> für die Hungrigen: Rechts einzeln registrieren, Mail abwarten (Spam-Ordner?), unten anmelden, <strong>Allergien</strong> eintragen, Veranstaltung wählen, Partner finden,…&nbsp;, Essen! <a href="<?php echo $this->url(array('controller'=>'index','action'=>'info'), null, FALSE); ?>">Mehr Infos</a>.</p>
 <p><strong>Neu!</strong> Ihr könnt euch auch alleine anmelden, und wir losen euch im Vorfeld einen Kochpartner zu – so könnt ihr sogar <strong>13</strong> neue Personen kennenlernen und der Abend wird noch viel lustiger!</p>
 <p>Viel Spaß wünscht euch euer <strong>Dinner-Team</strong> von der Studierendenvertretung!</p>
 </article>
@@ -21,7 +22,7 @@
 <article class="box orange">
 <h2>Registrieren</h2>
 <div class="content">
-<p>Bitte als Einzelpersonen anmelden, Teams werden erst im nächsten Schritt gebildet (alternativ teilen wir euch zu, wenn ihr mögt). Der Login kann dann auch für die nächsten Termine mit anderen Partnern verwendet werden.</p>
+<p>Bitte als Einzelpersonen anmelden, Teams werden erst im nächsten Schritt gebildet. Wir verwenden diese Daten nur, um die Teams untereinander zu vernetzen, euch bei Problemen Hilfe zu leisten und Werbung für die nächste Veranstaltung zu machen. Sonst nichts.</p>
 <?php echo $this->register_form; ?>
 </div>
 </article>

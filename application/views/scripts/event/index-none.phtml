@@ -3,22 +3,10 @@
 <h2>Ein Team bilden</h2>
 <div class="content">
 
-<?php if($this->no_partner): ?>
 <p>Wenn dein Partner registriert ist, kannst du ihn hier mit <strong>vollem Vor- und Nachnamen</strong> in dieser Reihenfolge suchen. Wenn du keine Fehler bei der Eingabe machst, sollte das System ihn finden und dein Partner erhält eine E-Mail, die ihn auffordert, deiner Anfrage nachzukommen.</p>
 <p>Sobald die Anfrage akzeptiert wurde, kann jeder von euch beiden im nächsten Schritt die Team-Informationen eingeben und ändern.</p>
-<?php endif; ?>
 
-<?php if($this->random_partner): ?>
-<p>Du hast ausgewählt, einen zufälligen Partner zu wünschen.</p>
-<?php endif; ?>
-
-<?php if($this->confirmation_partner): ?>
-<p>Dein angefragter Partner muss noch bestätigen, dass ihr wirklich ein Team werden sollt.</p>
-<?php endif; ?>
-
-<?php if(!$this->random_partner && !$this->confirmation_partner): ?>
 <?php echo $this->form; ?>
-<?php endif; ?>
 
 </div>
 </section>
@@ -32,14 +20,7 @@
 <article class="box orange">
 <h2>Auf Partnersuche gehen</h2>
 <div class="content">
-<?php if($this->no_partner): ?>
 <p><a class="button" href="<?php echo $this->url(array('controller'=>'event','action'=>'partnersuche'), null, FALSE); ?>">Ja, ich will!</a>&nbsp;&nbsp;&nbsp;<small>&nbsp;Wir übernehmen keine Garantie für Symphatie.</small></p>
-<?php else: ?>
-<p>Du hast doch bereits einen festen Partner!</p>
-<?php endif; ?>
-<?php if($this->random_partner): ?>
-<p><a class="button" href="<?php echo $this->url(array('controller'=>'event','action'=>'partnersuche','divorce'=>true), null, FALSE); ?>">Ich möchte mich doch festlegen!</a><br><small>Dieser Schritt ist nicht mehr möglich, sobald wir die Auslosung vorgenommen haben.</small></p>
-<?php endif; ?>
 </div>
 </article>
 </section>
