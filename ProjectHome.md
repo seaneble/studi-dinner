@@ -1,0 +1,1 @@
+System zur Anmeldung von Teilnehmern und Zuordnung der Abendessen-Gänge
